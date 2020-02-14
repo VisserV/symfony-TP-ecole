@@ -30,8 +30,8 @@ class UserType extends AbstractType
             ->add('password', PasswordType::class)
             ->add('name')
             ->add('firstName')
-            ->add('address', AddressType::class)
             ->add('phone')
+            ->add('address', AddressType::class)
         ;
     }
 

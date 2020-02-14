@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\School;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,10 +14,10 @@ class SchoolType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('address')
             ->add('phone')
-            ->add('email')
+            ->add('email', EmailType::class)
             ->add('timetable')
+            ->add('address', AddressType::class)
         ;
     }
 
