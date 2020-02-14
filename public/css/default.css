@@ -1,0 +1,34 @@
+.image-accueil{
+    background-color: var(--blanc);
+    padding: 50px 0 50px 0;
+}
+.image-accueil img{
+    width: 100%;
+}
+
+.actu{
+    background-color: var(--bleu_fonce);
+}
+.actu h2{
+    padding: 2% 0 2% 0;
+    margin: 0px;
+    color: var(--blanc);
+}
+h2.actu{
+    color: var(--blanc);
+}
+.main{
+    background-color: var(--bleu_fonce);
+    padding: 1px;
+}
+.news{
+    margin: 15px 0 15px 0;
+    padding: 20px;
+    background-color: var(--blanc);
+    border: 1px solid var(--bleu_fonce);
+    border-radius: 10px;
+}
+
+.img-news{
+    width: 100%;
+}
