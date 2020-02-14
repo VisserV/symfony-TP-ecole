@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -25,8 +26,8 @@ class User implements UserInterface
     private $email;
 
     /**
-     * Role[]|null
-     * @ORM\ManyToMany(targetEntity="App\Entity\Role", inversedBy="users")
+     * @var string[]|Collection
+     * @ORM\Column(type="array")
      */
     private $roles;
 
@@ -47,7 +48,7 @@ class User implements UserInterface
     private $receivedMessages;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Child", mappedBy="parent")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Child", mappedBy="parent")
      */
     private $children;
 
@@ -62,14 +63,15 @@ class User implements UserInterface
     private $firstName;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $address;
-
-    /**
      * @ORM\Column(type="string", length=12, nullable=true)
      */
     private $phone;
+
+    /**
+     * @var Address|null
+     * @ORM\OneToOne(targetEntity="App\Entity\Address", cascade={"persist", "remove"})
+     */
+    private $address;
 
     public function __construct()
     {
@@ -103,32 +105,26 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
-    /**
-     * @return Collection|Role[]
-     */
-    public function getRoles(): Collection
+    public function getRoles(): array
     {
-        return $this->roles;
+        return $this->roles->toArray();
     }
 
-    public function addRole(Role $role): self
+    public function addRole(String $role): self
     {
         $this->roles->add($role);
-        $role->addUser($this);
 
         return $this;
     }
 
-    public function removeRole(Role $role): self
+    public function removeRole($role): self
     {
         if ($this->roles->contains($role)) {
             $this->roles->removeElement($role);
-            $role->removeUser($this);
         }
-        $role->removeUser($this);
 
         return $this;
     }
@@ -153,7 +149,7 @@ class User implements UserInterface
      */
     public function getSalt()
     {
-        // not needed when using the "bcrypt" algorithm in security.yaml
+        return '+Gj&$52!';
     }
 
     /**
@@ -282,18 +278,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(string $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
     public function getPhone(): ?string
     {
         return $this->phone;
@@ -302,6 +286,18 @@ class User implements UserInterface
     public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(Address $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }
