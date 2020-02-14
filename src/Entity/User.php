@@ -25,9 +25,10 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="json")
+     * Role[]|null
+     * @ORM\ManyToMany(targetEntity="App\Entity\Role", inversedBy="users")
      */
-    private $roles = [];
+    private $roles;
 
     /**
      * @var string The hashed password
@@ -72,6 +73,7 @@ class User implements UserInterface
 
     public function __construct()
     {
+        $this->roles = new ArrayCollection();
         $this->sentMessages = new ArrayCollection();
         $this->receivedMessages = new ArrayCollection();
         $this->children = new ArrayCollection();
@@ -105,20 +107,28 @@ class User implements UserInterface
     }
 
     /**
-     * @see UserInterface
+     * @return Collection|Role[]
      */
-    public function getRoles(): array
+    public function getRoles(): Collection
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
+        return $this->roles;
     }
 
-    public function setRoles(array $roles): self
+    public function addRole(Role $role): self
     {
-        $this->roles = $roles;
+        $this->roles->add($role);
+        $role->addUser($this);
+
+        return $this;
+    }
+
+    public function removeRole(Role $role): self
+    {
+        if ($this->roles->contains($role)) {
+            $this->roles->removeElement($role);
+            $role->removeUser($this);
+        }
+        $role->removeUser($this);
 
         return $this;
     }
