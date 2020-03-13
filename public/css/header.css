@@ -1,0 +1,28 @@
+.header {
+    background-color: var(--bleu_fonce);
+}
+.logo {
+    width: 100px;
+    padding: 15px;
+}
+
+h1 {
+    color: var(--blanc);
+    text-align: center;
+    padding-top: 20px;
+}
+
+.connexion {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.icon {
+    width: 40px;
+}
+
+.connexion p {
+    font-size: 0.8em;
+    color: var(--blanc);
+    margin: 0;
+}

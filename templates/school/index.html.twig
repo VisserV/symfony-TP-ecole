@@ -2,8 +2,13 @@
 
 {% block title %}School index{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="css/school.css" rel="stylesheet"/>
+{% endblock %}
+
 {% block body %}
-    <h1>School index</h1>
+
 
     <table class="table">
         <thead>

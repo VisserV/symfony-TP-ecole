@@ -2,11 +2,43 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}{% endblock %}</title>
+        {% block stylesheets %}
+            <link href="css/header.css" rel="stylesheet"/>
+            <link href="css/menu.css" rel="stylesheet"/>
+            <link href="css/normalize.css" rel="stylesheet"/>
+            <link href="css/colors.css" rel="stylesheet"/>
+            <link href="css/bootstrap.min.css" rel="stylesheet"/>
+        {% endblock %}
+
     </head>
     <body>
+    <div class="container-fluid header">
+        <div class="container">
+            <div class="row">
+                <div class="col-2"><img src="images/logo-ecole.jpg" alt="logo de l'école" class="logo">
+                </div>
+                <div class="col-8"><h1>Le nom de l'école</h1></div>
+                <a href="" class="col-2 connexion">
+                    <img src="images/user.png" alt="logo de l'école" class="icon">
+                    <p>Se connecter</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid menu">
+        <div class="container">
+            <div class="row">
+                <a href="{{ path("child_index") }}" class="col">Cahier de correspondance</a>
+                <a href="" class="col">Messages au enseignants</a>
+                <a href="" class="col">Espace enfants</a>
+                <a href="/school" class="col">Infos école</a>
+                <a href="" class="col">Inscrire mon enfant</a>
+            </div>
+        </div>
+    </div>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
     </body>
+    {% block javascripts %}{% endblock %}
 </html>

@@ -1,0 +1,21 @@
+.menu {
+    background-color: var(--blanc);
+}
+
+.menu .col {
+    padding: 20px 0 20px 0;
+    text-align: center;
+    border-left: 1px solid var(--bleu_fonce);
+    border-bottom:1px solid var(--bleu_fonce) ;
+}
+.menu .col:last-child {
+    border-right:1px solid var(--bleu_fonce) ;
+}
+.menu .col:hover {
+    color: var(--blanc);
+    background-color: var(--bleu_clair);
+}
+.menu .col {
+    color: var(--bleu_fonce);
+    text-decoration: none;
+}
