@@ -42,4 +42,14 @@ class DefaultController extends AbstractController
             'child' => $childRepository->findAll()
         ]);
     }
+
+    /**
+     * @Route("/inscription", name="default_inscription", methods={"GET"})
+     */
+    public function inscription (ChildRepository $childRepository): Response
+    {
+        return $this->render('default/inscription.html.twig', [
+            'child' => $childRepository->findAll()
+        ]);
+    }
 }
