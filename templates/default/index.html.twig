@@ -14,33 +14,30 @@
         </div>
     </div>
 
-    <div class="container-fluid actu">
-        <div class="container">
-            <h2>Actualités de l'école</h2>
+    {% if news %}
+        <div class="container-fluid actu">
+            <div class="container">
+                <h2>Actualités de l'école</h2>
+            </div>
         </div>
-    </div>
-    {% for news in news %}
-        <div class="container-fluid main">
-        <div class="container">
-            <div class="news">
-                <h3>{{ news.title }}</h3>
-                <div class="row">
-                    <div class="col-4">
-                        <img src="images/clusaz.jpg" alt="la clusaz" class="img-news">
-                    </div>
-                    <div class="col">
-                        <p>{{ news.text }}</p>
+        {% for single in news %}
+            <div class="container-fluid main">
+                <div class="container">
+                    <div class="news">
+                        <h3>{{ single.title }}</h3>
+                        <div class="row">
+                            <div class="col-4">
+                                <img src="images/clusaz.jpg" alt="la clusaz" class="img-news">
+                            </div>
+                            <div class="col">
+                                <p>{{ single.text }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    {% else %}
-        <tr>
-            <td colspan="3">no records found</td>
-        </tr>
-    {% endfor %}
-
+        {% endfor %}
+    {% endif %}
 
     <div class="container-fluid info">
         <div class="container">
@@ -59,7 +56,5 @@
             </div>
         </div>
     </div>
-
-
 
 {% endblock %}
