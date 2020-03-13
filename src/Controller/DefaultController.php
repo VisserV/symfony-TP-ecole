@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends AbstractController
 {
     /**
-     * @Route("/", name="child_index", methods={"GET"})
+     * @Route("/", name="default_index", methods={"GET"})
      */
     public function index(NewsRepository $newsRepository, SchoolRepository $schoolRepository): Response
     {
