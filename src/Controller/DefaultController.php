@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ChildRepository;
 use App\Repository\NewsRepository;
 use App\Repository\SchoolRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,10 +36,10 @@ class DefaultController extends AbstractController
     /**
      * @Route("/espace-enfant", name="default_enfant", methods={"GET"})
      */
-    public function enfant (SchoolRepository $schoolRepository): Response
+    public function enfant (ChildRepository $childRepository): Response
     {
         return $this->render('default/enfant.html.twig', [
-            'school' => $schoolRepository->findOneBy([])
+            'child' => $childRepository->findAll()
         ]);
     }
 }
