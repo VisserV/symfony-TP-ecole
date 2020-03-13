@@ -31,4 +31,14 @@ class DefaultController extends AbstractController
             'school' => $schoolRepository->findOneBy([])
         ]);
     }
+
+    /**
+     * @Route("/espace-enfant", name="default_enfant", methods={"GET"})
+     */
+    public function enfant (SchoolRepository $schoolRepository): Response
+    {
+        return $this->render('default/enfant.html.twig', [
+            'school' => $schoolRepository->findOneBy([])
+        ]);
+    }
 }
