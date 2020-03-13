@@ -19,10 +19,19 @@
                 <div class="col-2"><a href="{{ path("default_index") }}"><img src="images/logo-ecole.jpg" alt="logo de l'école" class="logo"></a>
                 </div>
                 <div class="col-8"><h1>Le nom de l'école</h1></div>
-                <a href="" class="col-2 connexion">
-                    <img src="images/user.png" alt="logo de l'école" class="icon">
-                    <p>Se connecter</p>
-                </a>
+
+                {% if app.user %}
+                    <a href="{{ path('app_logout') }}" class="col-2 connexion">
+                        <img src="images/user.png" alt="logo de l'école" class="icon">
+                        <p>{{ app.user }}</p>
+                        <p>se déconnecter</p>
+                    </a>
+                {% else %}
+                    <a href="{{ path('app_login') }}" class="col-2 connexion">
+                        <img src="images/user.png" alt="logo de l'école" class="icon">
+                        <p>Se connecter</p>
+                    </a>
+                {% endif %}
             </div>
         </div>
     </div>
