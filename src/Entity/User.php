@@ -26,7 +26,7 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @var string[]|Collection
+     * @var string[]|ArrayCollection
      * @ORM\Column(type="array")
      */
     private $roles;
@@ -108,9 +108,12 @@ class User implements UserInterface
         return (string)$this->email;
     }
 
-    public function getRoles(): array
+    /**
+     * @return Collection|String[]
+     */
+    public function getRoles(): Collection
     {
-        return $this->roles->toArray();
+        return $this->roles;
     }
 
     public function addRole(String $role): self

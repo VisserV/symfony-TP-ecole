@@ -2,6 +2,16 @@ easy_admin:
   entities:
     User:
       class: App\Entity\User
+      form:
+        fields:
+          - { property: 'firstName' }
+          - { property: 'name' }
+          - { property: 'phone' }
+          - { property: 'email', type: 'email' }
+          - { property: 'password', type: 'password' }
+          - { property: 'address' }
+          - { property: 'children' }
+          - { property: 'roles', type: 'collection' }
     Child:
       class: App\Entity\Child
     News:
