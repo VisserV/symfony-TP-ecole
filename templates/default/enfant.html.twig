@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}default index{% endblock %}
+
+{% block stylesheets %}
+
+    {{ parent() }}
+    <link href="css/enfant.css" rel="stylesheet"/>
+{% endblock %}
+
+{% block body %}
+    {% if child %}
+        <div class="container-fluid info">
+            <div class="container">
+                <h2>Espace enfant</h2>
+            </div>
+        </div>
+        {% for single in child %}
+            <div class="container-fluid main">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6">
+                            <p>Prénom : {{ single.name }}</p>
+{#                                                    <p>Nom : {{ single.first_name }}</p>#}
+{#                                                    <p>Date de Naissance{{ single.birthdate }}</p>#}
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}
