@@ -32,7 +32,7 @@ class Child
     private $birthdate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="children")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="children")
      * @ORM\JoinColumn(nullable=false)
      */
     private $parent;

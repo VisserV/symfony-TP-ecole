@@ -22,11 +22,6 @@ class School
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $address;
-
-    /**
      * @ORM\Column(type="string", length=12)
      */
     private $phone;
@@ -41,6 +36,11 @@ class School
      */
     private $timetable;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Address", cascade={"persist", "remove"})
+     */
+    private $address;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -54,18 +54,6 @@ class School
     public function setName(?string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(string $address): self
-    {
-        $this->address = $address;
 
         return $this;
     }
@@ -102,6 +90,18 @@ class School
     public function setTimetable(string $timetable): self
     {
         $this->timetable = $timetable;
+
+        return $this;
+    }
+
+    public function getAddress(): Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }
