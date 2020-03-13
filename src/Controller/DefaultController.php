@@ -21,4 +21,14 @@ class DefaultController extends AbstractController
             'school' => $schoolRepository->findOneBy([])
         ]);
     }
+
+    /**
+     * @Route("/informations", name="default_infos", methods={"GET"})
+     */
+    public function infos (SchoolRepository $schoolRepository): Response
+    {
+        return $this->render('default/informations.html.twig', [
+            'school' => $schoolRepository->findOneBy([])
+        ]);
+    }
 }
