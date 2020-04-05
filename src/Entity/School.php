@@ -99,7 +99,7 @@ class School
         return $this->address;
     }
 
-    public function setAddress(string $address): self
+    public function setAddress(Address $address): self
     {
         $this->address = $address;
 
