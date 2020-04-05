@@ -26,10 +26,15 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @var string[]|Collection
-     * @ORM\Column(type="array")
+     * @var string
+     * @ORM\Column(type="string")
      */
-    private $roles;
+    private $role;
+
+    /**
+     * @var string The password
+     */
+    private $plainPassword;
 
     /**
      * @var string The hashed password
@@ -108,24 +113,50 @@ class User implements UserInterface
         return (string)$this->email;
     }
 
-    public function getRoles(): array
+    /**
+     * @return string
+     */
+    public function getRole(): string
     {
-        return $this->roles->toArray();
+        return $this->role;
     }
 
-    public function addRole(String $role): self
+    /**
+     * @param string $role
+     * @return User
+     */
+    public function setRole(string $role): self
     {
-        $this->roles->add($role);
-
+        $this->role = $role;
         return $this;
     }
 
-    public function removeRole($role): self
+    /**
+     * @return array
+     */
+    public function getRoles(): array
     {
-        if ($this->roles->contains($role)) {
-            $this->roles->removeElement($role);
-        }
+        $roles = ['ROLE_USER'];
+        if ($this->role == 'teacher') $roles[] = 'ROLE_TEACHER';
+        if ($this->role == 'admin') $roles[] = 'ROLE_ADMIN';
+        return $roles;
+    }
 
+    /**
+     * @return string
+     */
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string $plainPassword
+     * @return User
+     */
+    public function setPlainPassword(string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
         return $this;
     }
 
@@ -158,7 +189,7 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+         $this->plainPassword = null;
     }
 
     /**

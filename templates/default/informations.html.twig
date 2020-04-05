@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}default index{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="css/informations.css" rel="stylesheet"/>
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid info">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <h2>Informations de l'école</h2>
+                    <div class="infos">
+                        <p>{{ school.name }}</p>
+                        <p>Adresse : {{ school.address }}</p>
+                        <p>Telephone : {{ school.phone }}</p>
+                        <p>Email : {{ school.email }}</p>
+                        <p>Horaire d'ouverture : {{ school.timetable }}</p>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <img src="images/ecole.png" alt="école">
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

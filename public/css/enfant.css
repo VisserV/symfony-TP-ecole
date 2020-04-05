@@ -1,0 +1,9 @@
+body{
+    background-color: var(--blanc) !important;
+}
+
+
+.info{
+    margin-top: 50px;
+    background-color: var(--blanc);
+}

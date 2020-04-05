@@ -4,7 +4,7 @@ html,body{
     padding: 0;
     margin: 0;
     font-family: 'Montserrat', sans-serif;
-    background-color: var(--blanc);
+    background-color: var(--blanc)!important;
 }
 a{
     text-decoration: none;

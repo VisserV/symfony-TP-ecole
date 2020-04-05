@@ -16,7 +16,7 @@
     <div class="container-fluid header">
         <div class="container">
             <div class="row">
-                <div class="col-2"><img src="images/logo-ecole.jpg" alt="logo de l'école" class="logo">
+                <div class="col-2"><a href="{{ path("default_index") }}"><img src="images/logo-ecole.jpg" alt="logo de l'école" class="logo"></a>
                 </div>
                 <div class="col-8"><h1>Le nom de l'école</h1></div>
 
@@ -39,11 +39,11 @@
     <div class="container-fluid menu">
         <div class="container">
             <div class="row">
-                <a href="{{ path("child_index") }}" class="col">Cahier de correspondance</a>
-                <a href="" class="col">Messages au enseignants</a>
-                <a href="" class="col">Espace enfants</a>
-                <a href="/school" class="col">Infos école</a>
-                <a href="" class="col">Inscrire mon enfant</a>
+                <a href="" class="col">Cahier de correspondance</a>
+                <a href="" class="col">Messages aux enseignants</a>
+                <a href="{{ path('default_enfant') }}" class="col">Espace enfants</a>
+                <a href="{{ path('default_infos') }}" class="col">Infos école</a>
+                <a href="{{ path('default_inscription') }}" class="col">Inscrire mon enfant</a>
             </div>
         </div>
     </div>

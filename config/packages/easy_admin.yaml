@@ -2,11 +2,32 @@ easy_admin:
   entities:
     User:
       class: App\Entity\User
+      label: 'Utilisateur'
+      controller: App\Controller\UserController
+      form:
+        fields:
+          - { property: 'firstName', label: 'Prénom' }
+          - { property: 'name', label: 'Nom' }
+          - { property: 'phone', label: 'Téléphone' }
+          - { property: 'email', label: 'Adresse mail', type: 'email' }
+          - { property: 'plainPassword', label: 'Mot de passe', type: 'password' }
+          - { property: 'address', label: 'Adresse' }
+          - { property: 'children', label: 'Enfants' }
+          -
+            property: 'role'
+            label: 'Rôle'
+            type: 'choice'
+            type_options:
+              choices: { 'Utilisateur': 'user', 'Administrateur': 'admin', 'Professeur': 'teacher' }
     Child:
       class: App\Entity\Child
+      label: 'Enfant'
     News:
       class: App\Entity\News
+      label: 'Actualité'
     School:
       class: App\Entity\School
+      label: 'Ecole'
     Address:
       class: App\Entity\Address
+      label: 'Adresse'
