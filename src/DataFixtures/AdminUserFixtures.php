@@ -25,6 +25,7 @@ class AdminUserFixtures extends Fixture
         $user->setEmail('admin@ecole.fr');
         $user->setPhone('0122446688');
         $user->setAddress($address);
+        $user->setRole('admin');
         $user->setPassword('$argon2id$v=19$m=65536,t=4,p=1$TTRZOTVDanp5VFdpU2pvNQ$KMIvzWkvec1vsYHGBdesJiJxeHCMIoSFcBzAqx3SPCU'); // "admin"
         $manager->persist($user);
 
