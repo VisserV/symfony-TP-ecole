@@ -125,6 +125,6 @@ class Address
 
     public function __toString()
     {
-        return $this->streetNumber . ' ' . $this->streetName;
+        return $this->streetNumber . ' ' . $this->streetName . ' ' . $this->postalCode . ' ' . $this->city;
     }
 }

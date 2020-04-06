@@ -53,7 +53,7 @@ class User implements UserInterface
     private $receivedMessages;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Child", mappedBy="parent")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Child", mappedBy="parents")
      */
     private $children;
 
@@ -80,7 +80,6 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->roles = new ArrayCollection();
         $this->sentMessages = new ArrayCollection();
         $this->receivedMessages = new ArrayCollection();
         $this->children = new ArrayCollection();
@@ -116,7 +115,7 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getRole(): string
+    public function getRole(): ?string
     {
         return $this->role;
     }

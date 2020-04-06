@@ -26,7 +26,7 @@ class DefaultController extends AbstractController
     /**
      * @Route("/informations", name="default_infos", methods={"GET"})
      */
-    public function infos (SchoolRepository $schoolRepository): Response
+    public function infos(SchoolRepository $schoolRepository): Response
     {
         return $this->render('default/informations.html.twig', [
             'school' => $schoolRepository->findOneBy([])
@@ -36,9 +36,10 @@ class DefaultController extends AbstractController
     /**
      * @Route("/espace-enfant", name="default_enfant", methods={"GET"})
      */
-    public function enfant (ChildRepository $childRepository): Response
+    public function enfant(SchoolRepository $schoolRepository, ChildRepository $childRepository): Response
     {
         return $this->render('default/enfant.html.twig', [
+            'school' => $schoolRepository->findOneBy([]),
             'child' => $childRepository->findAll()
         ]);
     }
@@ -46,9 +47,10 @@ class DefaultController extends AbstractController
     /**
      * @Route("/inscription", name="default_inscription", methods={"GET"})
      */
-    public function inscription (ChildRepository $childRepository): Response
+    public function inscription(SchoolRepository $schoolRepository, ChildRepository $childRepository): Response
     {
         return $this->render('default/inscription.html.twig', [
+            'school' => $schoolRepository->findOneBy([]),
             'child' => $childRepository->findAll()
         ]);
     }

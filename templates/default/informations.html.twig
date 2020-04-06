@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}default index{% endblock %}
+{% block title %}Informations sur l'école{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -18,7 +18,7 @@
                         <p>Adresse : {{ school.address }}</p>
                         <p>Telephone : {{ school.phone }}</p>
                         <p>Email : {{ school.email }}</p>
-                        <p>Horaire d'ouverture : {{ school.timetable }}</p>
+                        <p>Horaire d'ouverture : {{ school.timetable|raw }}</p>
                     </div>
                 </div>
                 <div class="col-6">

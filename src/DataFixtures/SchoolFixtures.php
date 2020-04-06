@@ -24,7 +24,7 @@ class SchoolFixtures extends Fixture
         $school->setPhone('0123456789');
         $school->setAddress($address);
         $school->setEmail('contact@ecole.fr');
-        $school->setTimetable('Du lundi au vendredi (8h30 - 17h)');
+        $school->setTimetable('<ul><li>Lundi : 8h00 - 12h00 et 14h00 - 17h00</li><li>Mardi : 8h00 - 12h00 et 14h00 - 17h00</li><li>Mercredi : 8h00 - 12h00</li><li>Jeudi : 8h00 - 12h00 et 14h00 - 17h00</li><li>Vendredi : 8h00 - 12h00 et 14h00 - 17h00</li></ul>');
 
         $manager->persist($school);
 

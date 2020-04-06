@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,7 +37,12 @@ class Child
      * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="children")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $parent;
+    private $parents;
+
+    public function __construct()
+    {
+        $this->parents = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -78,15 +85,39 @@ class Child
         return $this;
     }
 
-    public function getParent(): ?User
+    /**
+     * @return Collection|User[]
+     */
+    public function getParents(): Collection
     {
-        return $this->parent;
+        return $this->parents;
     }
 
-    public function setParent(?User $parent): self
+    public function addParent(User $parent): self
     {
-        $this->parent = $parent;
+        if (!$this->parents->contains($parent)) {
+            $this->parents[] = $parent;
+            $parent->addChild($this);
+        }
 
         return $this;
+    }
+
+    public function removeParent(User $parent): self
+    {
+        if ($this->parents->contains($parent)) {
+            $this->parents->removeElement($parent);
+            // set the owning side to null (unless already changed)
+            if ($parent->getChildren()->contains($this)) {
+                $parent->removeChild($this);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->firstName . ' ' . $this->name . ' (' . $this->birthdate->format('d/m/Y') . ')';
     }
 }

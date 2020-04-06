@@ -1,33 +1,126 @@
 easy_admin:
+  formats:
+    date: 'd/m/Y'
+  list:
+    actions:
+      - { name: 'edit', icon: 'pencil', label: 'Editer' }
+      - { name: 'new', label: 'Ajouter %%entity_label%%' }
+      - { name: 'delete', label: 'Supprimer' }
+      - { name: 'search', label: 'Rechercher' }
+  edit:
+    title: "Editer l'%%entity_label%%"
+    actions:
+      - { name: 'delete', label: 'Supprimer' }
+      - { name: 'list', label: 'Retour à la liste' }
+  new:
+    title: 'Nouveau %%entity_label%%'
+    actions:
+      - { name: 'list', label: 'Retour à la liste' }
+  design:
+    menu:
+      - { entity: User, icon: user }
+      - { entity: Child, icon: child }
+      - { entity: News, icon: tag }
+      - { entity: School, icon: school }
+      - { entity: Address, icon: home }
   entities:
     User:
       class: App\Entity\User
       label: 'Utilisateur'
       controller: App\Controller\UserController
+      new:
+        title: 'Nouvel Utilisateur'
+      list:
+        fields:
+          - id
+          - { property: 'role', label: 'Rôle' }
+          - { property: 'firstName', label: 'Prénom' }
+          - { property: 'name', label: 'Nom' }
+          - { property: 'email', label: 'Adresse mail', type: 'email' }
+          - { property: 'phone', label: 'Téléphone' }
+          - { property: 'children', label: 'Enfants' }
+      form:
+        fields:
+          - { type: 'section', label: 'Général' }
+          - { property: 'firstName', label: 'Prénom' }
+          - { property: 'name', label: 'Nom' }
+          - { property: 'children', label: 'Enfants' }
+          - { type: 'section', label: 'Contact' }
+          - { property: 'phone', label: 'Téléphone' }
+          - { property: 'email', label: 'Adresse mail', type: 'email' }
+          - property: 'address'
+            label: 'Adresse postale'
+            type: 'App\Form\Type\AddressType'
+          - { type: 'section', label: 'Compte' }
+          - { property: 'plainPassword', label: 'Mot de passe', type: 'password' }
+          - property: 'role'
+            label: 'Rôle'
+            type: 'choice'
+            type_options:
+              choices: { 'Utilisateur': 'user', 'Professeur': 'teacher', 'Administrateur': 'admin' }
+    Child:
+      class: App\Entity\Child
+      label: 'Enfant'
+      new:
+        title: 'Nouvel Utilisateur'
       form:
         fields:
           - { property: 'firstName', label: 'Prénom' }
           - { property: 'name', label: 'Nom' }
-          - { property: 'phone', label: 'Téléphone' }
-          - { property: 'email', label: 'Adresse mail', type: 'email' }
-          - { property: 'plainPassword', label: 'Mot de passe', type: 'password' }
-          - { property: 'address', label: 'Adresse' }
-          - { property: 'children', label: 'Enfants' }
-          -
-            property: 'role'
-            label: 'Rôle'
-            type: 'choice'
-            type_options:
-              choices: { 'Utilisateur': 'user', 'Administrateur': 'admin', 'Professeur': 'teacher' }
-    Child:
-      class: App\Entity\Child
-      label: 'Enfant'
+          - property: 'birthdate'
+            label: 'Date de naissance'
+            type_options: { widget: 'single_text' }
+          - { property: 'parents', label: 'Parents' }
     News:
       class: App\Entity\News
       label: 'Actualité'
+      new:
+        title: 'Nouvelle Actualité'
+      list:
+        fields:
+          - id
+          - { property: 'title', label: 'Titre' }
+          - { property: 'text', label: 'Texte' }
+      form:
+        fields:
+          - { property: 'title', label: 'Titre' }
+          - { property: 'text', label: 'Texte' }
     School:
       class: App\Entity\School
       label: 'Ecole'
+      disabled_actions: ['new', 'delete', 'search']
+      list:
+        fields:
+          - { property: 'name', label: 'Nom' }
+          - { property: 'phone', label: 'Téléphone' }
+          - { property: 'email', label: 'Adresse mail', type: 'email' }
+          - { property: 'address', label: 'Adresse postale' }
+      form:
+        fields:
+          - { property: 'name', label: 'Nom' }
+          - { property: 'phone', label: 'Téléphone' }
+          - { property: 'email', label: 'Adresse mail', type: 'email' }
+          - { property: 'timetable', label: 'Emploi du temps' }
+          - property: 'address'
+            label: 'Adresse postale'
+            type: 'App\Form\Type\AddressType'
     Address:
       class: App\Entity\Address
       label: 'Adresse'
+      disabled_actions: ['new']
+      list:
+        fields:
+          - id
+          - { property: 'streetNumber', label: 'Numéro de rue' }
+          - { property: 'streetName', label: 'Nom de rue' }
+          - { property: 'postalCode', label: 'Code postal' }
+          - { property: 'city', label: 'Ville' }
+      form:
+        fields:
+          - { property: 'streetNumber', label: 'Numéro de rue' }
+          - { property: 'streetName', label: 'Nom de rue' }
+          - { property: 'additional1', label: 'Complément 1' }
+          - { property: 'additional2', label: 'Complément 2' }
+          - { property: 'postalCode', label: 'Code postal' }
+          - { property: 'city', label: 'Ville' }
+
