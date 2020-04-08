@@ -27,12 +27,14 @@ class AddressType extends AbstractType
             ])
             ->add('additional1', TextType::class, [
                 'label' => 'Complément 1',
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'ex: batiment C'
                 ]
             ])
             ->add('additional2', TextType::class, [
                 'label' => 'Complément 2',
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'ex: appartement C124'
                 ]

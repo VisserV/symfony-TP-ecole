@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un compte{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        <h1 class="h3 mb-3 font-weight-normal">Créer un compte</h1>
+
+        {{ form_start(form) }}
+
+        {% for error in errors %}
+            <div class="alert alert-danger">{{ error.messageTemplate }}</div>
+        {% endfor %}
+
+        {{ form_row(form.firstName) }}
+
+        {{ form_row(form.name) }}
+
+        {{ form_row(form.phone) }}
+
+        {{ form_row(form.address) }}
+
+        {{ form_row(form.email) }}
+
+        {{ form_row(form.plainPassword) }}
+
+        {{ form_row(form.confirmPassword) }}
+
+        <div class="text-center mt-5">
+            <button class="btn btn-lg btn-primary px-5" type="submit">
+                Créer
+            </button>
+            <p>
+                Déjà membre ?
+                <a href="{{ path('app_login') }}">Se connecter</a>
+            </p>
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        const adContainer = document.getElementById('user_address');
+        for (const adField of adContainer.getElementsByTagName('input')) {
+            adField.classList.add('form-control')
+        }
+    </script>
+{% endblock %}

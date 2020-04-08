@@ -24,14 +24,12 @@ class UserController extends EasyAdminController
     public function persistEntity($user)
     {
         $this->updatePassword($user);
-        $this->checkAddress($user);
         parent::persistEntity($user);
     }
 
     public function updateEntity($user)
     {
         $this->updatePassword($user);
-        $this->checkAddress($user);
         parent::updateEntity($user);
     }
 
@@ -39,20 +37,6 @@ class UserController extends EasyAdminController
     {
         if (!empty($user->getPlainPassword())) {
             $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPlainPassword()));
-        }
-    }
-
-    public function checkAddress(User $user)
-    {
-        $address = $user->getAddress();
-        if ($address !== null && $address->getId() === null) {
-//            parent::findBy(
-//                'Address',
-//                parent::createSearchQueryBuilder(
-//                    'Address',
-//
-//                )
-//            );
         }
     }
 }

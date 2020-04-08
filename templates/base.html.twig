@@ -16,7 +16,10 @@
     <div class="container-fluid header">
         <div class="container">
             <div class="row">
-                <div class="col-2"><a href="{{ path("default_index") }}"><img src="images/logo-ecole.jpg" alt="logo de l'école" class="logo"></a>
+                <div class="col-2">
+                    <a href="{{ path("default_index") }}">
+                        <img src="images/logo-ecole.jpg" alt="logo de l'école" class="logo">
+                    </a>
                 </div>
                 <div class="col-8"><h1>{{ school.name }}</h1></div>
 
@@ -39,11 +42,22 @@
     <div class="container-fluid menu">
         <div class="container">
             <div class="row">
-                <a href="" class="col">Cahier de correspondance</a>
-                <a href="" class="col">Messages aux enseignants</a>
-                <a href="{{ path('default_enfant') }}" class="col">Espace enfants</a>
-                <a href="{{ path('default_infos') }}" class="col">Infos école</a>
-                <a href="{{ path('default_inscription') }}" class="col">Inscrire mon enfant</a>
+                {% if app.user %}
+                    {% if app.user.children is not empty %}
+                        <a href="" class="col">Cahier de correspondance</a>
+                        <a href="" class="col">Messages aux enseignants</a>
+                        <a href="{{ path('default_enfant') }}" class="col">Espace enfants</a>
+                        <a href="{{ path('default_inscription') }}" class="col">Inscrire un autre enfant</a>
+                    {% else %}
+                        <a href="{{ path('default_inscription') }}" class="col">Inscrire mon enfant</a>
+                    {% endif %}
+                {% else %}
+                    <a href="{{ path('default_inscription') }}" class="col">Inscrire mon enfant</a>
+                {% endif %}
+                <a href="{{ path('default_infos') }}" class="col">Informations</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="/admin" class="col">Administration</a>
+                {% endif %}
             </div>
         </div>
     </div>

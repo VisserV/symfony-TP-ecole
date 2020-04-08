@@ -37,6 +37,11 @@ class User implements UserInterface
     private $plainPassword;
 
     /**
+     * @var string The password
+     */
+    private $confirmPassword;
+
+    /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
@@ -156,6 +161,24 @@ class User implements UserInterface
     public function setPlainPassword(string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getConfirmPassword(): ?string
+    {
+        return $this->confirmPassword;
+    }
+
+    /**
+     * @param string $confirmPassword
+     * @return User
+     */
+    public function setConfirmPassword(string $confirmPassword): User
+    {
+        $this->confirmPassword = $confirmPassword;
         return $this;
     }
 
