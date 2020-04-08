@@ -9,27 +9,25 @@
 {% endblock %}
 
 {% block body %}
-    {% if child %}
-        <div class="container-fluid info">
-            <div class="container">
-                <h2>Espace enfant</h2>
-            </div>
-        </div>
-        {% for single in child %}
-            <div class="container-fluid main">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-6">
-                            <p>Prénom : {{ single.name }}</p>
-{#                                                    <p>Nom : {{ single.first_name }}</p>#}
-{#                                                    <p>Date de Naissance{{ single.birthdate }}</p>#}
+
+    <div class="container-fluid info">
+        <div class="container">
+            <h2>Espace enfant</h2>
+
+            {% for child in children %}
+                <div class="container-fluid main">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <p>Prénom : {{ child.firstName }}</p>
+                                <p>Nom : {{ child.name }}</p>
+                                <p>Date de Naissance : {{ child.birthdate|date("d/m/Y") }}</p>
+                            </div>
                         </div>
-
-
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-    {% endif %}
+            {% endfor %}
+        </div>
+    </div>
 
 {% endblock %}

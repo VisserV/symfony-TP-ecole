@@ -288,7 +288,7 @@ class User implements UserInterface
     {
         if (!$this->children->contains($child)) {
             $this->children[] = $child;
-            $child->setParent($this);
+            $child->addParent($this);
         }
 
         return $this;
@@ -299,12 +299,17 @@ class User implements UserInterface
         if ($this->children->contains($child)) {
             $this->children->removeElement($child);
             // set the owning side to null (unless already changed)
-            if ($child->getParent() === $this) {
-                $child->setParent(null);
+            if ($child->getParents()->contains($this)) {
+                $child->removeParent(null);
             }
         }
 
         return $this;
+    }
+
+    public function hasChildren(): bool
+    {
+        return (!$this->children->isEmpty());
     }
 
     public function getName(): ?string

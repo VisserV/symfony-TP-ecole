@@ -3,10 +3,12 @@
 
 namespace App\Controller;
 
-use App\Repository\ChildRepository;
+use App\Entity\Child;
+use App\Form\Type\ChildType;
 use App\Repository\NewsRepository;
 use App\Repository\SchoolRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -36,22 +38,41 @@ class DefaultController extends AbstractController
     /**
      * @Route("/espace-enfant", name="default_enfant", methods={"GET"})
      */
-    public function enfant(SchoolRepository $schoolRepository, ChildRepository $childRepository): Response
+    public function enfant(SchoolRepository $schoolRepository): Response
     {
+        if (!$this->getUser()->hasChildren()) {
+            return $this->redirectToRoute('default_inscription');
+        }
+
         return $this->render('default/enfant.html.twig', [
             'school' => $schoolRepository->findOneBy([]),
-            'child' => $childRepository->findAll()
+            'children' => $this->getUser()->getChildren()
         ]);
     }
 
     /**
-     * @Route("/inscription", name="default_inscription", methods={"GET"})
+     * @Route("/inscription", name="default_inscription", methods={"GET", "POST"})
      */
-    public function inscription(SchoolRepository $schoolRepository, ChildRepository $childRepository): Response
+    public function inscription(SchoolRepository $schoolRepository, Request $request): Response
     {
+        $child = new Child();
+        $form = $this->createForm(ChildType::class, $child);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $child->addParent($this->getUser());
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($child);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('default_enfant');
+        }
+
         return $this->render('default/inscription.html.twig', [
             'school' => $schoolRepository->findOneBy([]),
-            'child' => $childRepository->findAll()
+            'child' => $child,
+            'form' => $form->createView(),
+            'errors' => $form->getErrors(true)
         ]);
     }
 }

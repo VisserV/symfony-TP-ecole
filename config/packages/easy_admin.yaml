@@ -63,6 +63,13 @@ easy_admin:
       label: 'Enfant'
       new:
         title: 'Nouvel Utilisateur'
+      list:
+        fields:
+         - id
+         - { property: 'firstName', label: 'Prénom' }
+         - { property: 'name', label: 'Nom' }
+         - { property: 'birthdate', label: 'Date de naissance' }
+         - { property: 'parents', label: 'Parents' }
       form:
         fields:
           - { property: 'firstName', label: 'Prénom' }
