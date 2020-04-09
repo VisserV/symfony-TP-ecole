@@ -19,7 +19,7 @@ class SchoolFixtures extends Fixture
         $manager->persist($address);
 
         $school = new School();
-        $school->setName('Nom de l\'école')
+        $school->setName('Ecole Alain Fournier')
                ->setPhone('0123456789')
                ->setAddress($address)
                ->setEmail('contact@ecole.fr')

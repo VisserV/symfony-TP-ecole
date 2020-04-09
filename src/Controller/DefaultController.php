@@ -79,4 +79,15 @@ class DefaultController extends AbstractController
             'errors' => $form->getErrors(true)
         ]);
     }
+
+    /**
+     * @Route("/messages", name="default_message", methods={"GET", "POST"})
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
+     */
+    public function message(SchoolRepository $schoolRepository, Request $request): Response
+    {
+        return $this->render('default/message.html.twig', [
+            'school' => $schoolRepository->findOneBy([])
+        ]);
+    }
 }

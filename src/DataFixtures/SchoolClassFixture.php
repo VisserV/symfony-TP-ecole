@@ -22,13 +22,13 @@ class SchoolClassFixture extends Fixture
         $manager->persist($address);
 
         $user = new User();
-        $user->setFirstName('Bruno')
-            ->setName('Tellez')
-            ->setEmail('bruno@ecole.fr')
+        $user->setFirstName('Olivier')
+            ->setName('Gallas')
+            ->setEmail('olivier@ecole.fr')
             ->setPhone('0133557799')
             ->setAddress($address)
             ->setRole('teacher')
-            ->setPassword('$argon2id$v=19$m=65536,t=4,p=1$VDVURUZ2NUx2WU1WVjRpMg$WUMnnqETM3GlWTfJ+jzqYvJ2AFKCdAklQny9Ozx8Uak'); // "teacher"
+            ->setPassword('$argon2id$v=19$m=65536,t=4,p=1$SmIveXhxTnd6eENUTlN3dg$tXOm4U7DxXGv9C6+7l0s5pzfh5NokO68ztV8Pui53z4'); // "olivier"
         $manager->persist($user);
 
         foreach (['Petite section', 'Moyenne section', 'Grande section'] as $className) {

@@ -43,9 +43,9 @@
         <div class="container">
             <div class="row">
                 {% if app.user %}
+                    <a href="{{ path('default_message') }}" class="col">Messages</a>
                     {% if app.user.children is not empty %}
                         <a href="" class="col">Cahier de correspondance</a>
-                        <a href="" class="col">Messages aux enseignants</a>
                         <a href="{{ path('default_enfant') }}" class="col">Espace enfants</a>
                         <a href="{{ path('default_inscription') }}" class="col">Inscrire un autre enfant</a>
                     {% else %}
