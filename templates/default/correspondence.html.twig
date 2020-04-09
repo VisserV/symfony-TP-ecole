@@ -1,18 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscrire mon enfant{% endblock %}
+{% block title %}Cahier de correspondance{% endblock %}
 
 {% block stylesheets %}
-
     {{ parent() }}
-    <link href="css/inscription.css" rel="stylesheet"/>
 {% endblock %}
 
 {% block body %}
-    <div class="container-fluid info">
+    <div class="container-fluid mt-5">
         <div class="container">
 
-            <h2 class="mb-3 font-weight-normal">Cahier de correspondance</h2>
+            <h2>Cahier de correspondance</h2>
+
+            {% if is_granted('ROLE_TEACHER') %}
+                <a href="{{ path('default_correspondence_new') }}">Ecrire dans le cahier de correspondance d'un enfant</a>
+            {% endif %}
 
         </div>
     </div>

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscrire mon enfant{% endblock %}
+{% block title %}Ecrire une note de correspondance{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -10,7 +10,7 @@
     <div class="container-fluid mt-5">
         <div class="container">
 
-            <h2>Inscrire mon enfant</h2>
+            <h2>Ecrire une note de correspondance</h2>
 
             {{ form_start(form) }}
 
@@ -18,21 +18,18 @@
                 <div class="alert alert-danger">{{ error.messageTemplate }}</div>
             {% endfor %}
 
-            {{ form_row(form.firstName) }}
+            {{ form_row(form.children) }}
 
-            {{ form_row(form.name) }}
-
-            {{ form_row(form.birthdate) }}
-
-            {{ form_row(form.schoolClass) }}
+            {{ form_row(form.text) }}
 
             <div class="text-center mt-5">
                 <button class="btn btn-lg btn-primary px-5" type="submit">
-                    Inscrire
+                    Envoyer
                 </button>
             </div>
 
             {{ form_end(form) }}
+
         </div>
     </div>
 

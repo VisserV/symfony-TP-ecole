@@ -4,7 +4,11 @@
 namespace App\Controller;
 
 use App\Entity\Child;
+use App\Entity\CorrespondenceBookNote;
+use App\Entity\SchoolClass;
 use App\Form\Type\ChildType;
+use App\Form\Type\CorrespondenceBookNoteType;
+use App\Repository\ChildRepository;
 use App\Repository\NewsRepository;
 use App\Repository\SchoolRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -96,10 +100,10 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/cahier-de-correspondance", name="default_correspondence", methods={"GET", "POST"})
+     * @Route("/cahier-de-correspondance", name="default_correspondence", methods={"GET"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
-    public function correspondence(SchoolRepository $schoolRepository, Request $request): Response
+    public function correspondence(SchoolRepository $schoolRepository, Request $request, ChildRepository $childRepository): Response
     {
         if (!$this->getUser()->hasChildren() && !$this->isGranted('ROLE_TEACHER')) {
             return $this->redirectToRoute('default_inscription');
@@ -107,6 +111,34 @@ class DefaultController extends AbstractController
 
         return $this->render('default/correspondence.html.twig', [
             'school' => $schoolRepository->findOneBy([])
+        ]);
+    }
+
+    /**
+     * @Route("/cahier-de-correspondance/ecrire", name="default_correspondence_new", methods={"GET", "POST"})
+     * @IsGranted("ROLE_TEACHER")
+     */
+    public function correspondenceNew(SchoolRepository $schoolRepository, Request $request): Response
+    {
+        $note = new CorrespondenceBookNote();
+        $form = $this->createForm(CorrespondenceBookNoteType::class, $note);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $note->setWritter($this->getUser());
+            $note->setSentDate(new \DateTime('now'));
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($note);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('default_correspondence');
+        }
+
+        return $this->render('default/correspondenceNew.html.twig', [
+            'school' => $schoolRepository->findOneBy([]),
+            'note' => $note,
+            'form' => $form->createView(),
+            'errors' => $form->getErrors(true)
         ]);
     }
 }

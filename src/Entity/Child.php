@@ -52,7 +52,7 @@ class Child
     private $acceptedInAskedClass;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CorrespondenceBookNote", mappedBy="child", orphanRemoval=true)
+     * @ORM\ManyToMany(targetEntity="App\Entity\CorrespondenceBookNote", mappedBy="children")
      */
     private $correspondenceBookNotes;
 

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,10 +19,10 @@ class CorrespondenceBookNote
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Child", inversedBy="correspondenceBookNotes")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Child", inversedBy="correspondenceBookNotes")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $child;
+    private $children;
 
     /**
      * @ORM\Column(type="text")
@@ -43,19 +45,43 @@ class CorrespondenceBookNote
      */
     private $writter;
 
+    public function __construct()
+    {
+        $this->children = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getChild(): ?Child
+    /**
+     * @return Collection|Child[]
+     */
+    public function getChildren(): Collection
     {
-        return $this->child;
+        return $this->children;
     }
 
-    public function setChild(?Child $child): self
+    public function addChildren(Child $child): self
     {
-        $this->child = $child;
+        if (!$this->children->contains($child)) {
+            $this->children[] = $child;
+            $child->addCorrespondenceBookNote($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChildren(Child $child): self
+    {
+        if ($this->children->contains($child)) {
+            $this->children->removeElement($child);
+            // set the owning side to null (unless already changed)
+            if ($child->getCorrespondenceBookNotes()->contains($this)) {
+                $child->removeCorrespondenceBookNote($this);
+            }
+        }
 
         return $this;
     }

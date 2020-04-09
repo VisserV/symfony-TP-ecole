@@ -93,14 +93,14 @@ easy_admin:
         fields:
          - id
          - { property: 'writter', label: 'Auteur' }
-         - { property: 'child', label: 'Enfant' }
+         - { property: 'children', label: 'Enfants' }
          - { property: 'text', label: 'Texte' }
          - { property: 'sentDate', label: "date d'envoi" }
          - { property: 'seenDate', label: 'date de consultation' }
       form:
         fields:
           - { property: 'writter', label: 'Auteur' }
-          - { property: 'child', label: 'Enfant' }
+          - { property: 'children', label: 'Enfants' }
           - { property: 'text', label: 'Texte' }
           - { property: 'sentDate', label: "date d'envoi", type_options: { widget: 'single_text' } }
           - { property: 'seenDate', label: 'date de consultation', type_options: { widget: 'single_text' } }

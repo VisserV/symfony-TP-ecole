@@ -5,7 +5,6 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -153,7 +152,7 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles = ['ROLE_USER'];
-        if ($this->role == 'teacher') $roles[] = 'ROLE_TEACHER';
+        if (($this->role == 'teacher') || ($this->role == 'admin')) $roles[] = 'ROLE_TEACHER';
         if ($this->role == 'admin') $roles[] = 'ROLE_ADMIN';
         return $roles;
     }

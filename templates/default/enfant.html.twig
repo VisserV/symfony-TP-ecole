@@ -3,27 +3,21 @@
 {% block title %}Espace enfant{% endblock %}
 
 {% block stylesheets %}
-
     {{ parent() }}
-    <link href="css/enfant.css" rel="stylesheet"/>
 {% endblock %}
 
 {% block body %}
 
-    <div class="container-fluid info">
+    <div class="container-fluid mt-5">
         <div class="container">
             <h2>Espace enfant</h2>
 
             {% for child in children %}
-                <div class="container-fluid main">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-6">
-                                <p>Prénom : {{ child.firstName }}</p>
-                                <p>Nom : {{ child.name }}</p>
-                                <p>Date de Naissance : {{ child.birthdate|date("d/m/Y") }}</p>
-                            </div>
-                        </div>
+                <div class="row">
+                    <div class="col-6">
+                        <p>Prénom : {{ child.firstName }}</p>
+                        <p>Nom : {{ child.name }}</p>
+                        <p>Date de Naissance : {{ child.birthdate|date("d/m/Y") }}</p>
                     </div>
                 </div>
             {% endfor %}
