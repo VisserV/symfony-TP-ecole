@@ -21,6 +21,7 @@ easy_admin:
       - { entity: User, icon: user }
       - { entity: Child, icon: child }
       - { entity: News, icon: tag }
+      - { entity: SchoolClass, icon: table }
       - { entity: School, icon: school }
       - { entity: Address, icon: home }
   entities:
@@ -66,6 +67,8 @@ easy_admin:
       list:
         fields:
          - id
+         - { property: 'schoolClass', label: 'Classe' }
+         - { property: 'acceptedInAskedClass', label: 'Accepté(e)' }
          - { property: 'firstName', label: 'Prénom' }
          - { property: 'name', label: 'Nom' }
          - { property: 'birthdate', label: 'Date de naissance' }
@@ -78,6 +81,8 @@ easy_admin:
             label: 'Date de naissance'
             type_options: { widget: 'single_text' }
           - { property: 'parents', label: 'Parents' }
+          - { property: 'schoolClass', label: 'Classe' }
+          - { property: 'acceptedInAskedClass', label: 'Accepté(e)' }
     News:
       class: App\Entity\News
       label: 'Actualité'
@@ -92,6 +97,24 @@ easy_admin:
         fields:
           - { property: 'title', label: 'Titre' }
           - { property: 'text', label: 'Texte' }
+    SchoolClass:
+      class: App\Entity\SchoolClass
+      label: 'Classe'
+      new:
+        title: 'Nouvelle Classe'
+      edit:
+        title: 'Editer la Classe'
+      list:
+        fields:
+          - id
+          - { property: 'libelle', label: 'Libelle' }
+          - { property: 'teacher', label: 'Professeur' }
+          - { property: 'children', label: 'Enfants' }
+      form:
+        fields:
+          - { property: 'libelle', label: 'Libelle' }
+          - { property: 'teacher', label: 'Professeur' }
+          - { property: 'children', label: 'Enfants' }
     School:
       class: App\Entity\School
       label: 'Ecole'

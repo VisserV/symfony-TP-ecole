@@ -39,6 +39,18 @@ class Child
      */
     private $parents;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\SchoolClass", inversedBy="children")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $schoolClass;
+
+    /**
+     * @var $acceptedInAskedClass boolean
+     * @ORM\Column(type="boolean")
+     */
+    private $acceptedInAskedClass;
+
     public function __construct()
     {
         $this->parents = new ArrayCollection();
@@ -113,6 +125,36 @@ class Child
             }
         }
 
+        return $this;
+    }
+
+    public function getSchoolClass(): ?SchoolClass
+    {
+        return $this->schoolClass;
+    }
+
+    public function setSchoolClass(?SchoolClass $schoolClass): self
+    {
+        $this->schoolClass = $schoolClass;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAcceptedInAskedClass(): ?bool
+    {
+        return $this->acceptedInAskedClass;
+    }
+
+    /**
+     * @param bool $acceptedInAskedClass
+     * @return Child
+     */
+    public function setAcceptedInAskedClass(bool $acceptedInAskedClass): self
+    {
+        $this->acceptedInAskedClass = $acceptedInAskedClass;
         return $this;
     }
 

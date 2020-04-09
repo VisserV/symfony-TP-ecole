@@ -5,6 +5,7 @@ namespace App\Form\Type;
 
 
 use App\Entity\Child;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -34,6 +35,14 @@ class ChildType extends AbstractType
                 'label' => 'Date de naissance',
                 'required' => true,
                 'widget' => 'single_text',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
+            ->add('schoolClass', EntityType::class, [
+                'label' => 'Classe demandée',
+                'class' => 'App\Entity\SchoolClass',
+                'required' => true,
                 'attr' => [
                     'class' => 'form-control'
                 ]

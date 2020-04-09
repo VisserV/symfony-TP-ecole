@@ -83,11 +83,17 @@ class User implements UserInterface
      */
     private $address;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\SchoolClass", mappedBy="teacher", cascade={"persist", "remove"})
+     */
+    private $schoolClasses;
+
     public function __construct()
     {
         $this->sentMessages = new ArrayCollection();
         $this->receivedMessages = new ArrayCollection();
         $this->children = new ArrayCollection();
+        $this->schoolClasses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -356,6 +362,37 @@ class User implements UserInterface
     public function setAddress(Address $address): self
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SchoolClass[]
+     */
+    public function getSchoolClasses(): Collection
+    {
+        return $this->schoolClasses;
+    }
+
+    public function addSchoolClass(SchoolClass $schoolClass): self
+    {
+        if (!$this->schoolClasses->contains($schoolClass)) {
+            $this->schoolClasses[] = $schoolClass;
+            $schoolClass->setTeacher($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSchoolClass(SchoolClass $schoolClass): self
+    {
+        if ($this->schoolClasses->contains($schoolClass)) {
+            $this->schoolClasses->removeElement($schoolClass);
+            // set the owning side to null (unless already changed)
+            if ($schoolClass->getTeacher() === $this) {
+                $schoolClass->setTeacher(null);
+            }
+        }
 
         return $this;
     }

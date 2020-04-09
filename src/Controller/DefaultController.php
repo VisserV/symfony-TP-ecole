@@ -64,6 +64,7 @@ class DefaultController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $child->addParent($this->getUser());
+            $child->setAcceptedInAskedClass(false);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($child);
             $entityManager->flush();
