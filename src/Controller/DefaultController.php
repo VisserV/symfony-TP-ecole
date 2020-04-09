@@ -86,7 +86,26 @@ class DefaultController extends AbstractController
      */
     public function message(SchoolRepository $schoolRepository, Request $request): Response
     {
+        if (!$this->getUser()->hasChildren()) {
+            return $this->redirectToRoute('default_inscription');
+        }
+
         return $this->render('default/message.html.twig', [
+            'school' => $schoolRepository->findOneBy([])
+        ]);
+    }
+
+    /**
+     * @Route("/cahier-de-correspondance", name="default_correspondence", methods={"GET", "POST"})
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
+     */
+    public function correspondence(SchoolRepository $schoolRepository, Request $request): Response
+    {
+        if (!$this->getUser()->hasChildren() && !$this->isGranted('ROLE_TEACHER')) {
+            return $this->redirectToRoute('default_inscription');
+        }
+
+        return $this->render('default/correspondence.html.twig', [
             'school' => $schoolRepository->findOneBy([])
         ]);
     }

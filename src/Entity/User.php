@@ -88,12 +88,18 @@ class User implements UserInterface
      */
     private $schoolClasses;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CorrespondenceBookNote", mappedBy="writter")
+     */
+    private $writtenCorrespondenceBookNotes;
+
     public function __construct()
     {
         $this->sentMessages = new ArrayCollection();
         $this->receivedMessages = new ArrayCollection();
         $this->children = new ArrayCollection();
         $this->schoolClasses = new ArrayCollection();
+        $this->writtenCorrespondenceBookNotes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -391,6 +397,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($schoolClass->getTeacher() === $this) {
                 $schoolClass->setTeacher(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CorrespondenceBookNote[]
+     */
+    public function getWrittenCorrespondenceBookNotes(): Collection
+    {
+        return $this->writtenCorrespondenceBookNotes;
+    }
+
+    public function addWrittenCorrespondenceBookNote(CorrespondenceBookNote $writtenCorrespondenceBookNote): self
+    {
+        if (!$this->writtenCorrespondenceBookNotes->contains($writtenCorrespondenceBookNote)) {
+            $this->writtenCorrespondenceBookNotes[] = $writtenCorrespondenceBookNote;
+            $writtenCorrespondenceBookNote->setWritter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWrittenCorrespondenceBookNote(CorrespondenceBookNote $writtenCorrespondenceBookNote): self
+    {
+        if ($this->writtenCorrespondenceBookNotes->contains($writtenCorrespondenceBookNote)) {
+            $this->writtenCorrespondenceBookNotes->removeElement($writtenCorrespondenceBookNote);
+            // set the owning side to null (unless already changed)
+            if ($writtenCorrespondenceBookNote->getWritter() === $this) {
+                $writtenCorrespondenceBookNote->setWritter(null);
             }
         }
 

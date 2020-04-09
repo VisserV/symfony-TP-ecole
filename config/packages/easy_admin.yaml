@@ -20,6 +20,7 @@ easy_admin:
     menu:
       - { entity: User, icon: user }
       - { entity: Child, icon: child }
+      - { entity: CorrespondenceBookNote, icon: book }
       - { entity: News, icon: tag }
       - { entity: SchoolClass, icon: table }
       - { entity: School, icon: school }
@@ -83,6 +84,26 @@ easy_admin:
           - { property: 'parents', label: 'Parents' }
           - { property: 'schoolClass', label: 'Classe' }
           - { property: 'acceptedInAskedClass', label: 'Accepté(e)' }
+    CorrespondenceBookNote:
+      class: App\Entity\CorrespondenceBookNote
+      label: 'Note de correspondance'
+      new:
+        title: 'Nouvelle Note'
+      list:
+        fields:
+         - id
+         - { property: 'writter', label: 'Auteur' }
+         - { property: 'child', label: 'Enfant' }
+         - { property: 'text', label: 'Texte' }
+         - { property: 'sentDate', label: "date d'envoi" }
+         - { property: 'seenDate', label: 'date de consultation' }
+      form:
+        fields:
+          - { property: 'writter', label: 'Auteur' }
+          - { property: 'child', label: 'Enfant' }
+          - { property: 'text', label: 'Texte' }
+          - { property: 'sentDate', label: "date d'envoi", type_options: { widget: 'single_text' } }
+          - { property: 'seenDate', label: 'date de consultation', type_options: { widget: 'single_text' } }
     News:
       class: App\Entity\News
       label: 'Actualité'

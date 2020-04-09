@@ -51,9 +51,15 @@ class Child
      */
     private $acceptedInAskedClass;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CorrespondenceBookNote", mappedBy="child", orphanRemoval=true)
+     */
+    private $correspondenceBookNotes;
+
     public function __construct()
     {
         $this->parents = new ArrayCollection();
+        $this->correspondenceBookNotes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -155,6 +161,37 @@ class Child
     public function setAcceptedInAskedClass(bool $acceptedInAskedClass): self
     {
         $this->acceptedInAskedClass = $acceptedInAskedClass;
+        return $this;
+    }
+
+    /**
+     * @return Collection|CorrespondenceBookNote[]
+     */
+    public function getCorrespondenceBookNotes(): Collection
+    {
+        return $this->correspondenceBookNotes;
+    }
+
+    public function addCorrespondenceBookNote(CorrespondenceBookNote $correspondenceBookNote): self
+    {
+        if (!$this->correspondenceBookNotes->contains($correspondenceBookNote)) {
+            $this->correspondenceBookNotes[] = $correspondenceBookNote;
+            $correspondenceBookNote->setChild($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCorrespondenceBookNote(CorrespondenceBookNote $correspondenceBookNote): self
+    {
+        if ($this->correspondenceBookNotes->contains($correspondenceBookNote)) {
+            $this->correspondenceBookNotes->removeElement($correspondenceBookNote);
+            // set the owning side to null (unless already changed)
+            if ($correspondenceBookNote->getChild() === $this) {
+                $correspondenceBookNote->setChild(null);
+            }
+        }
+
         return $this;
     }
 
