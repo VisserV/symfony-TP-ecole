@@ -6,11 +6,11 @@ TP-ecole
 
 **1.  L'environnement**
 
-Il faut tout d'abord s'assurer que WAMP (ou XAMP ou LAMP pour Mac ou Linux), PHP, Composer et Symfony sont bien installés sur le poste.
+Il faut tout d'abord s'assurer que MySQL (MySQL Workbench), PHP, Composer et Symfony sont bien installés sur le poste.
 
 Sinon, les liens suivants peuvent aider :
 
-[Installation WAMP](http://www.wampserver.com/en/download-wampserver-64bits/)
+[Installation MySQL Workbanch](https://dev.mysql.com/downloads/workbench/)
 
 [Installation PHP](https://www.php.net/downloads.php)
 
@@ -42,13 +42,15 @@ Exécuter la commande suivante :
 
 **4.  Créer la base de donnée et son jeu de données**
 
-Démarrer WAMP
+Démarrer MySQL
 
-Aller à l'adresse "http://localhost/phpmyadmin/" et créer un utilisateur avec le nom "ecole" et le mot de passe "ecole" ayant tous les privilèges
+Créer un utilisateur avec le nom "ecole" et le mot de passe "ecole" avec une authentification standard à l'aide de MySQL Workbench. Assurez vous que cet utilisateur ait tous les privilèges
 
 Exécuter les commandes suivantes :
 
 `php bin/console doctrine:database:create`
+
+`php bin/console doctrine:migrations:migrate`
 
 `php bin/console doctrine:fixtures:load`
 
