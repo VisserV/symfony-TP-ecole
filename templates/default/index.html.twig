@@ -27,7 +27,7 @@
                         <h3>{{ single.title }}</h3>
                         <div class="row">
                             <div class="col-4">
-                                <img src="images/clusaz.jpg" alt="la clusaz" class="img-news">
+                                <img src="{{ vich_uploader_asset(single, 'imageFile') }}" alt="{{ single.altImage }}" class="img-news">
                             </div>
                             <div class="col">
                                 <p>{{ single.text }}</p>
