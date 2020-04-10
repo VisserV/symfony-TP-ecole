@@ -150,6 +150,8 @@ easy_admin:
           - { property: 'phone', label: 'Téléphone' }
           - { property: 'email', label: 'Adresse mail', type: 'email' }
           - { property: 'address', label: 'Adresse postale' }
+          - { property: 'logo', label: 'Logo' }
+          - { property: 'schoolImage', label: "Image de l'école" }
       form:
         fields:
           - { property: 'name', label: 'Nom' }
@@ -159,6 +161,10 @@ easy_admin:
           - property: 'address'
             label: 'Adresse postale'
             type: 'App\Form\Type\AddressType'
+          - { property: 'logoFile', label: 'Logo', type: 'vich_image' }
+          - { property: 'altLogo', label: "Texte alternatif du logo" }
+          - { property: 'schoolImageFile', label: "Image de l'école", type: 'vich_image' }
+          - { property: 'altSchoolImage', label: "Texte alternatif de l'image de l'école" }
     Address:
       class: App\Entity\Address
       label: 'Adresse'

@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-2">
                     <a href="{{ path("default_index") }}">
-                        <img src="images/logo-ecole.jpg" alt="logo de l'école" class="logo">
+                        <img src="{{ vich_uploader_asset(school, 'logoFile') }}" alt="{{ school.altLogo }}" class="logo">
                     </a>
                 </div>
                 <div class="col-8"><h1>{{ school.name }}</h1></div>

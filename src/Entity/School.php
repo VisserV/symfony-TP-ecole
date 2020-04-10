@@ -3,9 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SchoolRepository")
+ * @Vich\Uploadable
  */
 class School
 {
@@ -40,6 +43,42 @@ class School
      * @ORM\OneToOne(targetEntity="App\Entity\Address", cascade={"persist", "remove"})
      */
     private $address;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
+     */
+    private $logo;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
+     */
+    private $altLogo;
+
+    /**
+     * @Vich\UploadableField(mapping="school_image", fileNameProperty="logo")
+     * @var File
+     */
+    private $logoFile;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
+     */
+    private $schoolImage;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
+     */
+    private $altSchoolImage;
+
+    /**
+     * @Vich\UploadableField(mapping="school_image", fileNameProperty="schoolImage")
+     * @var File
+     */
+    private $schoolImageFile;
 
     public function getId(): ?int
     {
@@ -103,6 +142,72 @@ class School
     {
         $this->address = $address;
 
+        return $this;
+    }
+
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(string $logo): self
+    {
+        $this->logo = $logo;
+        return $this;
+    }
+
+    public function getAltLogo(): ?string
+    {
+        return $this->altLogo;
+    }
+
+    public function setAltLogo(string $altLogo): self
+    {
+        $this->altLogo = $altLogo;
+        return $this;
+    }
+
+    public function getLogoFile(): ?File
+    {
+        return $this->logoFile;
+    }
+
+    public function setLogoFile(File $logoFile): self
+    {
+        $this->logoFile = $logoFile;
+        return $this;
+    }
+
+    public function getSchoolImage(): ?string
+    {
+        return $this->schoolImage;
+    }
+
+    public function setSchoolImage(string $schoolImage): self
+    {
+        $this->schoolImage = $schoolImage;
+        return $this;
+    }
+
+    public function getAltSchoolImage(): ?string
+    {
+        return $this->altSchoolImage;
+    }
+
+    public function setAltSchoolImage(string $altSchoolImage): self
+    {
+        $this->altSchoolImage = $altSchoolImage;
+        return $this;
+    }
+
+    public function getSchoolImageFile(): ?File
+    {
+        return $this->schoolImageFile;
+    }
+
+    public function setSchoolImageFile(File $schoolImageFile): self
+    {
+        $this->schoolImageFile = $schoolImageFile;
         return $this;
     }
 }

@@ -10,7 +10,7 @@
 {% block body %}
     <div class="container-fluid image-accueil">
         <div class="container">
-            <img src="images/ecole.png" alt="">
+            <img src="{{ vich_uploader_asset(school, 'schoolImageFile') }}" alt="{{ school.altSchoolImage }}" class="logo">
         </div>
     </div>
 
