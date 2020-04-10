@@ -19,47 +19,62 @@
                 {% endif %}
             </div>
 
-            {% for child in app.user.children %}
+            <div class="tab-frame">
+                {% set index = 1 %}
+                {% for child in app.user.children %}
+                    <input type="radio" checked name="tab" id="tab{{ index }}">
+                    <label for="tab{{ index }}">{{ child.firstName }}</label>
+                    {% set index = index + 1 %}
+                {% endfor %}
 
-                <p class="h4 my-4">Cahier de correspondance de {{ child.firstName }}</p>
+                {% for child in app.user.children %}
+                    <div class="tab">
 
-                <table class="w-100 table table-striped mb-5">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="text-center">Date</th>
-                            <th scope="col" class="text-center">Auteur</th>
-                            <th scope="col" class="text-center">Texte</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for note in child.correspondenceBookNotes %}
-                            {% if note.seenDate %}
-                                <tr id="note-{{ note.id }}" onclick="displayNoteInModal('{{ note.writter }}', '{{ note.text }}')">
-                            {% else %}
-                                <tr id="note-{{ note.id }}" class="non-lu" onclick="displayNoteInModal('{{ note.writter }}', '{{ note.text }}', {{ note.id }})" >
-                            {% endif %}
-                                <td>{{ note.sentDate|date('d/m/Y') }}</td>
-                                <td>{{ note.writter }}</td>
-                                <td>
-                                    {{ note.text|slice(0, 50) }}
-                                    {% if note.text|length > 50 %}
-                                        ...
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    {% if not note.seenDate %}
-                                        <a href="{{ path('default_correspondence_read', { noteId: note.id }) }}" class="markAsRead text-dark">
-                                            Marquer comme lu
-                                        </a>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            {% endfor %}
+                        <p class="h4 my-4">Cahier de correspondance de {{ child.firstName }}</p>
 
+                        {% if child.correspondenceBookNotes is not empty %}
+                            <table class="w-100 table table-striped mb-5">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center">Date</th>
+                                        <th scope="col" class="text-center">Auteur</th>
+                                        <th scope="col" class="text-center">Texte</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for note in child.correspondenceBookNotes %}
+                                        {% if note.seenDate %}
+                                        <tr id="note-{{ note.id }}" onclick="displayNoteInModal('{{ note.writter }}', '{{ note.text }}')">
+                                        {% else %}
+                                            <tr id="note-{{ note.id }}" class="non-lu" onclick="displayNoteInModal('{{ note.writter }}', '{{ note.text }}', {{ note.id }})" >
+                                        {% endif %}
+                                        <td>{{ note.sentDate|date('d/m/Y') }}</td>
+                                        <td>{{ note.writter }}</td>
+                                        <td>
+                                            {{ note.text|slice(0, 50) }}
+                                            {% if note.text|length > 50 %}
+                                                ...
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if not note.seenDate %}
+                                                <a href="{{ path('default_correspondence_read', { noteId: note.id }) }}" class="markAsRead text-dark">
+                                                    Marquer comme lu
+                                                </a>
+                                            {% endif %}
+                                        </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p>Le cahier de correspondance de {{ child.firstName }} est vide</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+            </div>
 
             <!-- The Modal -->
             <div id="myModal" class="modal">
