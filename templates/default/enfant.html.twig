@@ -12,30 +12,40 @@
         <div class="container">
             <h2>Espace enfant</h2>
             <div class="tab-frame">
-                 <input type="radio" checked name="tab" id="tab1">
-                <label for="tab1">tab1</label>
+                {% set index = 1 %}
+                {% for child in children %}
+                    <input type="radio" checked name="tab" id="tab{{ index }}">
+                    <label for="tab{{ index }}">{{ child.firstName }}</label>
+                    {% set index = index + 1 %}
+                {% endfor %}
 
-                 <input type="radio" name="tab" id="tab2">
-                <label for="tab2">tab2</label>
-  
-                 <input type="radio" name="tab" id="tab3">
-                 <label for="tab3">tab3</label>
-
-
-            {% for child in children %}
-                <div class="tab">
-                    <div class="row">
-                        <div class="col-4">
-                            <p>Prénom : {{ child.firstName }}</p>
-                            <p>Nom : {{ child.name }}</p>
-                            <p>Date de Naissance : {{ child.birthdate|date("d/m/Y") }}</p>
+                {% for child in children %}
+                    <div class="tab">
+                        <div class="row">
+                            <div class="col-6">
+                                <p>Prénom : {{ child.firstName }}</p>
+                                <p>Nom : {{ child.name }}</p>
+                                <p>Date de Naissance : {{ child.birthdate|date("d/m/Y") }}</p>
+                            </div>
                         </div>
-                        <div class="col-4">
-                            <img src={{ asset('/images/classPhoto/ecole.jpg') }} alt="">
-                        </div>       
+                        {% if child.classPhotos is not empty %}
+                            <div class="row">
+                                <h4 class="col-12">Souvenirs</h4>
+
+                                {% for photo in child.classPhotos %}
+
+                                    <div class="col-8 mx-auto">
+                                        <p class="mt-4">{{ photo.classLibelle ~ ' (' ~ photo.year ~ ')' }}</p>
+
+                                        <img class="w-100" src="{{ vich_uploader_asset(photo, 'imageFile') }}" alt="{{ photo.altImage }}">
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                     </div>
-                </div> 
-            {% endfor %}
+                {% endfor %}
+
+            </div>
         </div>
     </div>
 
