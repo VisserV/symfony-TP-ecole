@@ -56,10 +56,16 @@ class Child
      */
     private $correspondenceBookNotes;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\ClassPhoto", mappedBy="children")
+     */
+    private $classPhotos;
+
     public function __construct()
     {
         $this->parents = new ArrayCollection();
         $this->correspondenceBookNotes = new ArrayCollection();
+        $this->classPhotos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -198,5 +204,33 @@ class Child
     public function __toString()
     {
         return $this->firstName . ' ' . $this->name . ' (' . $this->birthdate->format('d/m/Y') . ')';
+    }
+
+    /**
+     * @return Collection|ClassPhoto[]
+     */
+    public function getClassPhotos(): Collection
+    {
+        return $this->classPhotos;
+    }
+
+    public function addClassPhoto(ClassPhoto $classPhoto): self
+    {
+        if (!$this->classPhotos->contains($classPhoto)) {
+            $this->classPhotos[] = $classPhoto;
+            $classPhoto->addChild($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClassPhoto(ClassPhoto $classPhoto): self
+    {
+        if ($this->classPhotos->contains($classPhoto)) {
+            $this->classPhotos->removeElement($classPhoto);
+            $classPhoto->removeChild($this);
+        }
+
+        return $this;
     }
 }

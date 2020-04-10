@@ -6,6 +6,7 @@
 parameters:
     app.path.school_image: /images/school
     app.path.news_image: /images/news
+    app.path.class_image: /images/classPhoto
 
 services:
     # default configuration for services in *this* file

@@ -22,6 +22,7 @@ easy_admin:
       - { entity: Child, icon: child }
       - { entity: CorrespondenceBookNote, icon: book }
       - { entity: News, icon: tag }
+      - { entity: ClassPhoto, icon: photo }
       - { entity: SchoolClass, icon: table }
       - { entity: School, icon: school }
       - { entity: Address, icon: home }
@@ -124,6 +125,24 @@ easy_admin:
           - { property: 'codeYoutube', label: 'Code vidéo Youtube' }
           - { property: 'imageFile', label: 'Image', type: 'vich_image' }
           - { property: 'altImage', label: "Texte alternatif de l'image" }
+    ClassPhoto:
+      class: App\Entity\ClassPhoto
+      label: 'Photo de classe'
+      new:
+        title: 'Nouvelle Photo de classe'
+      list:
+        fields:
+          - id
+          - { property: 'classLibelle', label: 'Classe' }
+          - { property: 'children', label: 'Enfants' }
+          - { property: 'image', label: 'Photo' }
+          - { property: 'altImage', label: "Alternatif" }
+      form:
+        fields:
+          - { property: 'classLibelle', label: 'Classe' }
+          - { property: 'children', label: 'Enfants' }
+          - { property: 'imageFile', label: 'Photo', type: 'vich_image' }
+          - { property: 'altImage', label: "Texte alternatif de la photo" }
     SchoolClass:
       class: App\Entity\SchoolClass
       label: 'Classe'
