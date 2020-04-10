@@ -1,6 +1,7 @@
 easy_admin:
   formats:
     date: 'd/m/Y'
+    datetime: 'd/m/Y H:i:s'
   list:
     actions:
       - { name: 'edit', icon: 'pencil', label: 'Editer' }
@@ -113,11 +114,11 @@ easy_admin:
       list:
         fields:
           - id
+          - { property: 'updatedAt', label: 'date de MAJ' }
           - { property: 'title', label: 'Titre' }
           - { property: 'text', label: 'Texte' }
           - { property: 'codeYoutube', label: 'Code vidéo Youtube' }
           - { property: 'image', label: 'Image' }
-          - { property: 'altImage', label: "Alternatif" }
       form:
         fields:
           - { property: 'title', label: 'Titre' }
