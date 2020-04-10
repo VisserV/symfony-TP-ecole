@@ -19,43 +19,43 @@
             <div class="container">
                 <h2>Actualités de l'école</h2>
             </div>
-        </div>
-        {% for single in news %}
-            <div class="container-fluid main">
-                <div class="container">
-                    <div class="news">
-                        <h3>{{ single.title }}</h3>
-                        <div class="row">
-                            {% if single.codeYoutube %}
-                                <div class="col-6">
-                                    <div class="video-responsive w-100">
-                                        <iframe width="100%" src="https://www.youtube.com/embed/{{ single.codeYoutube }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            {% for single in news|slice(0, 3) %}
+                <div class="container-fluid main">
+                    <div class="container">
+                        <div class="news">
+                            <h3>{{ single.title }}</h3>
+                            <div class="row">
+                                {% if single.codeYoutube %}
+                                    <div class="col-6">
+                                        <div class="video-responsive w-100">
+                                            <iframe width="100%" src="https://www.youtube.com/embed/{{ single.codeYoutube }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        </div>
                                     </div>
+                                {% elseif single.image %}
+                                    <div class="col-5">
+                                        <img src="{{ vich_uploader_asset(single, 'imageFile') }}" alt="{{ single.altImage }}" class="img-news">
+                                    </div>
+                                {% endif %}
+                                <div class="col">
+                                    <p>{{ single.text }}</p>
                                 </div>
-                            {% elseif single.image %}
-                                <div class="col-5">
-                                    <img src="{{ vich_uploader_asset(single, 'imageFile') }}" alt="{{ single.altImage }}" class="img-news">
-                                </div>
-                            {% endif %}
-                            <div class="col">
-                                <p>{{ single.text }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+            {# si page dédiée pour voir  touts les actu : décommenter les lignes suivantes et faire la page #}
+{#            <div class="text-center pb-3">#}
+{#                <a href="" class="text-white">Voir toutes les actualités de l'école</a>#}
+{#            </div>#}
+        </div>
     {% endif %}
 
-    <div class="container-fluid info">
+    <div class="container-fluid info pt-5">
         <div class="container">
             <h2>Informations</h2>
-        </div>
-    </div>
 
-    <div class="container-fluid">
-        <div class="container">
-            <div class="infos">
+            <div class="infos mt-5">
                 <p>{{ school.name }}</p>
                 <p>Adresse : {{ school.address }}</p>
                 <p>Telephone : {{ school.phone }}</p>

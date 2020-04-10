@@ -5,7 +5,6 @@ namespace App\Controller;
 
 use App\Entity\Child;
 use App\Entity\CorrespondenceBookNote;
-use App\Entity\SchoolClass;
 use App\Form\Type\ChildType;
 use App\Form\Type\CorrespondenceBookNoteType;
 use App\Repository\ChildRepository;
@@ -25,7 +24,7 @@ class DefaultController extends AbstractController
     public function index(NewsRepository $newsRepository, SchoolRepository $schoolRepository): Response
     {
         return $this->render('default/index.html.twig', [
-            'news' => $newsRepository->findAll(),
+            'news' => $newsRepository->findBy([], ['updatedAt' => 'DESC']),
             'school' => $schoolRepository->findOneBy([])
         ]);
     }
