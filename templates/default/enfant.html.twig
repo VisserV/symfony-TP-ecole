@@ -8,20 +8,37 @@
 
 {% block body %}
 
-    <div class="container-fluid mt-5">
+   <div class="container-fluid mt-5">
         <div class="container">
             <h2>Espace enfant</h2>
+            <div class="tab-frame">
+                 <input type="radio" checked name="tab" id="tab1">
+                <label for="tab1">tab1</label>
+
+                 <input type="radio" name="tab" id="tab2">
+                <label for="tab2">tab2</label>
+  
+                 <input type="radio" name="tab" id="tab3">
+                 <label for="tab3">tab3</label>
+
 
             {% for child in children %}
-                <div class="row">
-                    <div class="col-6">
-                        <p>Prénom : {{ child.firstName }}</p>
-                        <p>Nom : {{ child.name }}</p>
-                        <p>Date de Naissance : {{ child.birthdate|date("d/m/Y") }}</p>
+                <div class="tab">
+                    <div class="row">
+                        <div class="col-4">
+                            <p>Prénom : {{ child.firstName }}</p>
+                            <p>Nom : {{ child.name }}</p>
+                            <p>Date de Naissance : {{ child.birthdate|date("d/m/Y") }}</p>
+                        </div>
+                        <div class="col-4">
+                            <img src={{ asset('/images/classPhoto/ecole.jpg') }} alt="">
+                        </div>       
                     </div>
-                </div>
+                </div> 
             {% endfor %}
         </div>
     </div>
+
+
 
 {% endblock %}
