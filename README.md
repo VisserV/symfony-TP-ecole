@@ -75,32 +75,38 @@ Dans le jeu de données, un administrateur a été créé avec l'adresse mail "a
 
 
 
-
-
-
-
-
 **Liste des fonctionalitées**
 
 En tant qu’utilisateur non connecté, je peux consulter les messages publics de l’école.
+
 En tant qu’utilisateur non connecté, je peux accéder à une page regroupant les informations de l’école.
+
 En tant qu’utilisateur non connecté, je peux m’inscrire (adresse mail + mot de passe).
 
+
+
 En tant parent d’élève, je peux faire une demande d’inscription de mon enfant.
-En tant que parent d’élève, je peux consulter les messages du carnet de correspondance des
-enfants.
+
+En tant que parent d’élève, je peux consulter les messages du carnet de correspondance des enfants.
+
 En tant que parent d’élève, je peux voir la photo de classe de mes enfants.
 
-En tant qu’administrateur de l’école, je peux créer des messages publics avec des images ou
-vidéos.
+
+
+En tant qu’administrateur de l’école, je peux créer des messages publics avec des images ou vidéos.
+
 En tant qu’administrateur de l’école, je peux valider les inscriptions.
+
 En tant qu’administrateur de l’école, je peux répondre aux messages des parents.
 
 **en plus**
 
 En tant qu’administrateur de l’école, je peux changer la photo d'acceuil et le logo de l'ecole depuis la partie administration.
+
 En tant qu’administrateur de l’école, je peux créer de nouveau utilisateurs.
+
 En tant qu’administrateur de l’école, je peux changer les rôles des utilisateurs.
+
 En tant qu’administrateur de l’école, attribuer un professeur à une classe et y ajouter les eleves.
 
 
