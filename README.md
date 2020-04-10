@@ -96,7 +96,7 @@ vidéos
 En tant qu’administrateur de l’école, je peux valider les inscriptions
 En tant qu’administrateur de l’école, je peux répondre aux messages des parents
 
-** en plus **
+**en plus**
 
 En tant qu’administrateur de l’école, je peux changer la photo d'acceuil et le logo de l'ecole depuis la partie administration
 En tant qu’administrateur de l’école, je peux créer de nouveau utilisateurs
