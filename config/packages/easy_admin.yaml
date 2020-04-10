@@ -129,19 +129,31 @@ easy_admin:
     ClassPhoto:
       class: App\Entity\ClassPhoto
       label: 'Photo de classe'
-      new:
-        title: 'Nouvelle Photo de classe'
+      controller: App\Controller\ClassPhotoController
       list:
         fields:
           - id
+          - { property: 'year', label: 'Année' }
           - { property: 'classLibelle', label: 'Classe' }
           - { property: 'children', label: 'Enfants' }
           - { property: 'image', label: 'Photo' }
           - { property: 'altImage', label: "Alternatif" }
+      new:
+        title: 'Nouvelle Photo de classe'
+        fields:
+          - property: 'schoolClass'
+            label: 'Classe'
+            type: 'entity'
+            type_options:
+              class: 'App\Entity\SchoolClass'
+      edit:
+        title: 'Editer la Photo de classe'
+        fields:
+          - { property: 'classLibelle', label: 'Libellé de la classe' }
+          - { property: 'children', label: 'Enfants' }
       form:
         fields:
-          - { property: 'classLibelle', label: 'Classe' }
-          - { property: 'children', label: 'Enfants' }
+          - { property: 'year', label: 'Année' }
           - { property: 'imageFile', label: 'Photo', type: 'vich_image' }
           - { property: 'altImage', label: "Texte alternatif de la photo" }
     SchoolClass:

@@ -25,6 +25,12 @@ class ClassPhoto
      * @ORM\Column(type="string", length=255)
      * @var string
      */
+    private $year;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
+     */
     private $classLibelle;
 
     /**
@@ -50,6 +56,11 @@ class ClassPhoto
      */
     private $children;
 
+    /**
+     * @var SchoolClass
+     */
+    private $schoolClass;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
@@ -58,6 +69,17 @@ class ClassPhoto
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getYear(): ?string
+    {
+        return $this->year;
+    }
+
+    public function setYear(string $year): self
+    {
+        $this->year = $year;
+        return $this;
     }
 
     public function getClassLibelle(): ?string
@@ -127,6 +149,17 @@ class ClassPhoto
             $this->children->removeElement($child);
         }
 
+        return $this;
+    }
+
+    public function getSchoolClass(): ?SchoolClass
+    {
+        return $this->schoolClass;
+    }
+
+    public function setSchoolClass(SchoolClass $schoolClass): self
+    {
+        $this->schoolClass = $schoolClass;
         return $this;
     }
 }
