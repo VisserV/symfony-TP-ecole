@@ -114,12 +114,14 @@ easy_admin:
           - id
           - { property: 'title', label: 'Titre' }
           - { property: 'text', label: 'Texte' }
+          - { property: 'codeYoutube', label: 'Code vidéo Youtube' }
           - { property: 'image', label: 'Image' }
           - { property: 'altImage', label: "Alternatif" }
       form:
         fields:
           - { property: 'title', label: 'Titre' }
           - { property: 'text', label: 'Texte' }
+          - { property: 'codeYoutube', label: 'Code vidéo Youtube' }
           - { property: 'imageFile', label: 'Image', type: 'vich_image' }
           - { property: 'altImage', label: "Texte alternatif de l'image" }
     SchoolClass:

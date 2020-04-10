@@ -30,13 +30,13 @@ class News
     private $text;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      */
     private $image;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      */
     private $altImage;
@@ -46,6 +46,12 @@ class News
      * @var File
      */
     private $imageFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     */
+    private $codeYoutube;
 
     public function getId(): ?int
     {
@@ -81,7 +87,7 @@ class News
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(?string $image): self
     {
         $this->image = $image;
         return $this;
@@ -92,7 +98,7 @@ class News
         return $this->altImage;
     }
 
-    public function setAltImage(string $altImage): self
+    public function setAltImage(?string $altImage): self
     {
         $this->altImage = $altImage;
         return $this;
@@ -106,6 +112,17 @@ class News
     public function setImageFile(File $imageFile): self
     {
         $this->imageFile = $imageFile;
+        return $this;
+    }
+
+    public function getCodeYoutube(): ?string
+    {
+        return $this->codeYoutube;
+    }
+
+    public function setCodeYoutube(?string $codeYoutube): self
+    {
+        $this->codeYoutube = $codeYoutube;
         return $this;
     }
 }

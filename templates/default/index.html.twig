@@ -26,9 +26,17 @@
                     <div class="news">
                         <h3>{{ single.title }}</h3>
                         <div class="row">
-                            <div class="col-4">
-                                <img src="{{ vich_uploader_asset(single, 'imageFile') }}" alt="{{ single.altImage }}" class="img-news">
-                            </div>
+                            {% if single.codeYoutube %}
+                                <div class="col-6">
+                                    <div class="video-responsive w-100">
+                                        <iframe width="100%" src="https://www.youtube.com/embed/{{ single.codeYoutube }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            {% elseif single.image %}
+                                <div class="col-5">
+                                    <img src="{{ vich_uploader_asset(single, 'imageFile') }}" alt="{{ single.altImage }}" class="img-news">
+                                </div>
+                            {% endif %}
                             <div class="col">
                                 <p>{{ single.text }}</p>
                             </div>
