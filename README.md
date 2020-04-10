@@ -77,6 +77,9 @@ Dans le jeu de données, un administrateur a été créé avec l'adresse mail "a
 
 
 
+
+
+
 **Liste des fonctionalitées**
 
 En tant qu’utilisateur non connecté, je peux consulter les messages publics de l’école.
