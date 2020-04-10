@@ -4,19 +4,119 @@
 
 {% block stylesheets %}
     {{ parent() }}
+    <link href="css/correspondence.css" rel="stylesheet"/>
 {% endblock %}
 
 {% block body %}
     <div class="container-fluid mt-5">
         <div class="container">
 
-            <h2>Cahier de correspondance</h2>
+            <div class="mb-5">
+                <h2>Cahier de correspondance</h2>
 
-            {% if is_granted('ROLE_TEACHER') %}
-                <a href="{{ path('default_correspondence_new') }}">Ecrire dans le cahier de correspondance d'un enfant</a>
-            {% endif %}
+                {% if is_granted('ROLE_TEACHER') %}
+                    <a href="{{ path('default_correspondence_new') }}">Ecrire dans le cahier de correspondance d'un enfant</a>
+                {% endif %}
+            </div>
+
+            {% for child in app.user.children %}
+
+                <p class="h4 my-4">Cahier de correspondance de {{ child.firstName }}</p>
+
+                <table class="w-100 table table-striped mb-5">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-center">Date</th>
+                            <th scope="col" class="text-center">Auteur</th>
+                            <th scope="col" class="text-center">Texte</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for note in child.correspondenceBookNotes %}
+                            {% if note.seenDate %}
+                                <tr id="note-{{ note.id }}" onclick="displayNoteInModal('{{ note.writter }}', '{{ note.text }}')">
+                            {% else %}
+                                <tr id="note-{{ note.id }}" class="non-lu" onclick="displayNoteInModal('{{ note.writter }}', '{{ note.text }}', {{ note.id }})" >
+                            {% endif %}
+                                <td>{{ note.sentDate|date('d/m/Y') }}</td>
+                                <td>{{ note.writter }}</td>
+                                <td>
+                                    {{ note.text|slice(0, 50) }}
+                                    {% if note.text|length > 50 %}
+                                        ...
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if not note.seenDate %}
+                                        <a href="{{ path('default_correspondence_read', { noteId: note.id }) }}" class="markAsRead text-dark">
+                                            Marquer comme lu
+                                        </a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endfor %}
+
+
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <input class="id" type="hidden" value="-1">
+                    <p class="h4 writter"></p>
+                    <p class="note-text"></p>
+                </div>
+            </div>
 
         </div>
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        // Get the modal and elements
+        const modal = document.getElementById("myModal");
+        const span = modal.getElementsByClassName("close")[0];
+        const writerZone = modal.getElementsByClassName("writter")[0];
+        const textZone = modal.getElementsByClassName("note-text")[0];
+        const idZone = modal.getElementsByClassName("id")[0];
+
+        // When the user clicks the button, open the modal
+        function displayNoteInModal(writter, text, id = null) {
+            writerZone.innerText = writter;
+            textZone.innerText = text;
+            modal.style.display = "block";
+            if (id !== null) {
+                idZone.value = id;
+                document.getElementById('note-' + id).classList.remove('non-lu');
+            }
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            if (idZone.value != -1) {
+                window.location = '/lire-la-note-du-cahier-de-correspondance/' + idZone.value;
+            }
+            modal.style.display = "none";
+            writerZone.innerText = '';
+            textZone.innerText = '';
+        };
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                if (idZone.value != -1) {
+                    window.location = '/lire-la-note-du-cahier-de-correspondance/' + idZone.value;
+                }
+                modal.style.display = "none";
+                writerZone.innerText = '';
+                textZone.innerText = '';
+            }
+        }
+    </script>
 {% endblock %}

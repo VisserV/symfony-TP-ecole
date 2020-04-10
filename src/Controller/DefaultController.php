@@ -8,6 +8,7 @@ use App\Entity\CorrespondenceBookNote;
 use App\Form\Type\ChildType;
 use App\Form\Type\CorrespondenceBookNoteType;
 use App\Repository\ChildRepository;
+use App\Repository\CorrespondenceBookNoteRepository;
 use App\Repository\NewsRepository;
 use App\Repository\SchoolRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -139,5 +140,20 @@ class DefaultController extends AbstractController
             'form' => $form->createView(),
             'errors' => $form->getErrors(true)
         ]);
+    }
+
+    /**
+     * @Route("/lire-la-note-du-cahier-de-correspondance/{noteId}", name="default_correspondence_read", methods={"GET"})
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
+     */
+    public function correspondenceRead(int $noteId, CorrespondenceBookNoteRepository $noteRepository)
+    {
+        $note = $noteRepository->find($noteId);
+        $note->setSeenDate(new \DateTime('now'));
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->flush();
+
+        return $this->redirectToRoute('default_correspondence');
     }
 }
