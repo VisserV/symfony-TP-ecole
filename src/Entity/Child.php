@@ -201,11 +201,6 @@ class Child
         return $this;
     }
 
-    public function __toString()
-    {
-        return $this->firstName . ' ' . $this->name . ' (' . $this->birthdate->format('d/m/Y') . ')';
-    }
-
     /**
      * @return Collection|ClassPhoto[]
      */
@@ -232,5 +227,10 @@ class Child
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->firstName . ' ' . $this->name . ' (' . $this->birthdate->format('d/m/Y') . ')';
     }
 }
