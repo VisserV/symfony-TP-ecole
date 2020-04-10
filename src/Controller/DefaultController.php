@@ -115,18 +115,18 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/cahier-de-correspondance/ecrire", name="default_correspondence_new", methods={"GET", "POST"})
+     * @Route("/ecrire-dans-un-cahier-de-correspondance", name="default_correspondence_new", methods={"GET", "POST"})
      * @IsGranted("ROLE_TEACHER")
      */
     public function correspondenceNew(SchoolRepository $schoolRepository, Request $request): Response
     {
         $note = new CorrespondenceBookNote();
+        $note->setWritter($this->getUser());
+        $note->setSentDate(new \DateTime('now'));
         $form = $this->createForm(CorrespondenceBookNoteType::class, $note);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $note->setWritter($this->getUser());
-            $note->setSentDate(new \DateTime('now'));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($note);
             $entityManager->flush();
