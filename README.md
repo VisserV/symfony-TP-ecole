@@ -10,7 +10,7 @@ Il faut tout d'abord s'assurer que MySQL (MySQL Workbench), PHP, Composer et Sym
 
 Sinon, les liens suivants peuvent aider :
 
-[Installation MySQL Workbanch](https://dev.mysql.com/downloads/workbench/)
+[Installation MySQL Workbench](https://dev.mysql.com/downloads/workbench/)
 
 [Installation PHP](https://www.php.net/downloads.php)
 
@@ -71,3 +71,35 @@ Aller à l'url indiquée dans la ligne verte du terminal (habituellement "127.0.
 Ajouter "/admin" à la fin de l'url
 
 Dans le jeu de données, un administrateur a été créé avec l'adresse mail "admin@ecole.fr" et le mot de passe "admin", utiliser ces informations pour la connexion
+
+
+
+
+
+
+**Liste des fonctionalitées**
+
+En tant qu’utilisateur non connecté, je peux consulter les messages publics de l’école.
+En tant qu’utilisateur non connecté, je peux accéder à une page regroupant les informations de l’école.
+En tant qu’utilisateur non connecté, je peux m’inscrire (adresse mail + mot de passe).
+
+En tant parent d’élève, je peux faire une demande d’inscription de mon enfant.
+En tant que parent d’élève, je peux consulter les messages du carnet de correspondance des
+enfants.
+En tant que parent d’élève, je peux voir la photo de classe de mes enfants
+
+En tant qu’administrateur de l’école, je peux créer des messages publics avec des images ou
+vidéos
+En tant qu’administrateur de l’école, je peux valider les inscriptions
+En tant qu’administrateur de l’école, je peux répondre aux messages des parents
+
+** en plus **
+
+En tant qu’administrateur de l’école, je peux changer la photo d'acceuil et le logo de l'ecole depuis la partie administration
+En tant qu’administrateur de l’école, je peux créer de nouveau utilisateurs
+En tant qu’administrateur de l’école, je peux changer les rôles des utilisateurs
+En tant qu’administrateur de l’école, attribuer un professeur à une classe et y ajouter les eleves
+
+
+
+
