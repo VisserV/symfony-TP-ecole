@@ -77,37 +77,55 @@ Dans le jeu de données, un administrateur a été créé avec l'adresse mail "a
 
 **Liste des fonctionalitées**
 
-En tant qu’utilisateur non connecté, je peux consulter les messages publics de l’école.
+En tant qu’utilisateur non connecté, je peux consulter les messages publics de l’école (actualités, les 3 plus récentes).
 
 En tant qu’utilisateur non connecté, je peux accéder à une page regroupant les informations de l’école.
 
-En tant qu’utilisateur non connecté, je peux m’inscrire (adresse mail + mot de passe).
+En tant qu’utilisateur non connecté, je peux m’inscrire.
 
 
 
 En tant parent d’élève, je peux faire une demande d’inscription de mon enfant.
 
-En tant que parent d’élève, je peux consulter les messages du carnet de correspondance des enfants.
+En tant que parent d’élève, je peux consulter les notes du carnet de correspondance de mes enfants.
 
-En tant que parent d’élève, je peux voir la photo de classe de mes enfants.
+En tant que parent d’élève, je peux voir les photos de classe de mes enfants.
 
 
 
-En tant qu’administrateur de l’école, je peux créer des messages publics avec des images ou vidéos.
+En tant qu’administrateur de l’école, je peux créer des messages publics avec une image ou vidéo Youtube.
 
-En tant qu’administrateur de l’école, je peux valider les inscriptions.
-
-En tant qu’administrateur de l’école, je peux répondre aux messages des parents.
+En tant qu’administrateur de l’école, je peux valider les inscriptions des enfants.
 
 **en plus**
 
-En tant qu’administrateur de l’école, je peux changer la photo d'acceuil et le logo de l'ecole depuis la partie administration.
+En tant qu’administrateur de l’école, je peux consulter l'ensemble des données enregistrée en base de données depuis la partie administration.
 
-En tant qu’administrateur de l’école, je peux créer de nouveau utilisateurs.
+En tant qu’administrateur de l’école, je peux changer la photo d'acceuil, le logo, le nom, l'adresse postale, l'adresse email et le numéro de téléphone de l'ecole.
+
+En tant qu’administrateur de l’école, je peux créer de nouvel utilisateur.
+
+En tant qu’administrateur de l’école, je peux mettre à jour un utilisateur ou le supprimer.
 
 En tant qu’administrateur de l’école, je peux changer les rôles des utilisateurs.
 
-En tant qu’administrateur de l’école, attribuer un professeur à une classe et y ajouter les eleves.
+En tant qu’administrateur de l’école, je peux créer de nouvel enfant.
+
+En tant qu’administrateur de l’école, je peux mettre à jour un enfant ou le supprimer.
+
+En tant qu’administrateur de l’école, je peux créer une classe, lui attribuer un professeur et y ajouter les enfants.
+
+En tant qu’administrateur de l’école, je peux mettre à jour une classe ou la supprimer.
+
+En tant qu’administrateur de l’école, je peux ajouter une nouvelle photo de classe à une classe.
+
+En tant qu’administrateur de l’école, je peux mettre à jour l'année et la liste des enfants d'une photo de classe ou la supprimer.
+
+En tant qu’administrateur de l’école, je peux écrire une nouvelle note de correspondance dans le cahier d'un ou plusieurs enfants.
+
+En tant qu’administrateur de l’école, je peux mettre à jour une note de correspondance ou la supprimer.
+
+En tant qu’administrateur de l’école, je peux mettre à jour une adresse.
 
 
 
